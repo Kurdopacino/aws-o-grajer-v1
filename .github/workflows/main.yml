@@ -1,0 +1,42 @@
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v3
+              with: 
+                dotnet-version: '9.0'  # Change if using a stable .NET version
+            - name: CLean 
+              run: dotnet clean
+
+            - name: Restore dependencies
+              run: dotnet restore
+
+            - name: Build and Publish
+              run: dotnet publish -c Release -r linux-x64 -o site
+
+            - name: Create Deployment ZIP
+              run: |
+                cd site
+                zip -r ../site.zip .
+
+            - name: Deploy to AWS Elastic Beanstalk
+              uses: einaregilsson/beanstalk-deploy@v22
+              with:
+                 aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                 aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                 application_name: api-test
+                 environment_name: Api-test-env
+                 version_label: ${{ github.run_id }}
+                 region: us-east-1
+                 deployment_package: site.zip
+                 use_existing_version_if_available: true
