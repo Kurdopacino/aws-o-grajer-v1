@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/obj/MapAWSogrejer.csproj.nuget.dgspec.json
+/obj/MapAWSogrejer.csproj.nuget.g.props
+/obj/MapAWSogrejer.csproj.nuget.g.targets
+/obj/project.nuget.cache
+/obj/project.assets.json
+/.vs/MapAWSogrejer/FileContentIndex/4c8d6a35-b3ba-4cf4-9663-9096b7a8d39f.vsidx
+/.vs/MapAWSogrejer/FileContentIndex
+/obj/Debug/net9.0/MapAWSogrejer.assets.cache
+/obj/Debug/net9.0/MapAWSogrejer.GlobalUsings.g.cs
+/MapAWSogrejer.csproj.user
